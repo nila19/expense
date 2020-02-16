@@ -1,0 +1,11 @@
+<!-- Monthly Trend Chart -->
+<div ng-show="$ctrl.data.showChart" class="col-md-6">
+  <div class="card">
+    <div class="card-header" data-background-color="blue">
+      <h4 class="title text-uppercase">Monthly Trend</h4>
+    </div>
+    <div class="card-content">
+      <canvas height="63" class="chart chart-bar" chart-data="$ctrl.data.data" chart-options="$ctrl.data.options" chart-dataset-override="$ctrl.data.ds" chart-labels="$ctrl.data.labels"></canvas>
+    </div>
+  </div>
+</div>
