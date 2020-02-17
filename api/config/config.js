@@ -24,8 +24,8 @@ const root = {
 const regions = {
   prod: {
     env: 'PROD',
-    port: 8000,
-    dburl: 'localhost:27017/expense',
+    port: process.env.PORT,
+    dburl: process.env.MONGO_URL,
     billcloser: true,
     blocked: {
       on: true,
@@ -35,19 +35,18 @@ const regions = {
       on: true,
     },
     log: {
-      path: 'C:\\Java\\logs\\ExpenseTracker.log',
+      path: process.env.LOG_PATH + '/expense-tracker.log',
       period: '1m',
       count: 12
     },
   },
   dev: {
     env: 'DEV',
-    port: 8800,
-    dburl: 'localhost:27017/test',
-    sqlite: 'C:\\Java\\SQLite\\Data\\Prod - v2017.03.13.db',
+    port: process.env.PORT,
+    dburl: process.env.MONGO_URL,
     billcloser: true,
     log: {
-      path: 'C:\\Java\\logs\\ExpenseTracker-Test.log',
+      path: process.env.LOG_PATH + '/expense-tracker.log',
       period: '1m',
       count: 12
     },
