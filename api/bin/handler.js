@@ -1,6 +1,8 @@
 /* eslint no-process-exit: "off"*/
 'use strict';
 
+const config = require('../config/config');
+
 const onError = function (err, app) {
   if (err.syscall !== 'listen') {
     throw err;
@@ -24,7 +26,7 @@ const onError = function (err, app) {
 };
 
 const onListening = function (app) {
-  app.locals.log.info('Listening on port :: ' + app.get('port'));
+  app.locals.log.info('Listening on port :: ' + app.get('port') + ' DB :: ' + config.dburl);
 };
 
 const unCaught = function (err, app) {

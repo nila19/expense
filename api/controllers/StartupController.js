@@ -11,7 +11,7 @@ const config = require('../config/config');
 
 const canConnect = function (req, resp) {
   if(!req.app.locals.db) {
-    req.app.locals.log.info('DB connection not available...');
+    req.app.locals.log.info('DB connection not available...  DB URL :: ' + config.dburl);
     return resp.json({code: config.error});
   }
 

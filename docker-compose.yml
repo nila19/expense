@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: app.Dockerfile
+    image: expense_web
+    environment:
+      - MONGO_URL=mongodb/expense
+      - LOG_PATH=/logs
+      - PORT=8000
+    volumes:
+      - "C:/Java/logs:/logs"
+    ports:
+      - 8000:8000
+    networks:
+      - expensenet
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo
+    volumes:
+      - "/mnt/c/Java/mongodb/data:/data/db"
+    ports:
+      - 27017:27017
+    expose:
+      - "27017"
+    networks:
+      - expensenet
+
+networks:
+  expensenet:
