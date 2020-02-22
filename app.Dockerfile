@@ -7,15 +7,21 @@ COPY . /app
 # ENV MONGO_URL=host.docker.internal:27017/expense
 # ENV LOG_PATH=/logs
 # ENV PORT=8000
+ENV TIME_ZONE=EST
+RUN echo ${TIME_ZONE} >/etc/timezone && \
+    ln -sf /usr/share/zoneinfo/${TIME_ZONE} /etc/localtime && \
+    dpkg-reconfigure -f noninteractive tzdata
+RUN echo "Timezone: $TIME_ZONE  => Current Time: `date`"
 CMD npm run prod
 
+###--------------------------------------------------------------------------------------------------###
 ###----------------------------------------- APP ----------------------------------------------------###
 
 # docker build . -t expense-image
 #
 # docker run --rm --name expense --network="host" -p 8000:8000 -p 27017:27017 -v C:/Java/logs:/logs expense-image
 #
-# docker run -t -i --rm --name expense -p 8000:8000 -p 27017:27017 -v C:/Java/logs:/logs expense-image
+# docker run -it --rm --name expense -p 8000:8000 -p 27017:27017 -v C:/Java/logs:/logs expense-image
 #
 # docker container ls
 # docker container rm -f expense
@@ -32,7 +38,17 @@ CMD npm run prod
 # docker run -d --name mongodb -v /mnt/c/Java/mongodb/data:/data/db -p 27017:27017 mongo
 
 # run in interactive mode; remove the container upon exit
-# docker run -i -t --rm --name mongodb -v /mnt/c/Java/mongodb/data:/data/db -p 27017:27017 mongo
+# docker run -it --rm --name mongodb -v /mnt/c/Java/mongodb/data:/data/db -p 27017:27017 mongo
 # C:\Java\mongodb> mongorestore
 
+###--------------------------------------------------------------------------------------------------###
+###------------------------------------------ TIME --------------------------------------------------###
+
+# Time synchronization - Run this in Administrator Powershell
+# Get-VMIntegrationService -VMName DockerDesktopVM
+#
+# Get-VMIntegrationService -VMName DockerDesktopVM -Name "Time Synchronization" | Disable-VMIntegrationService
+# Get-VMIntegrationService -VMName DockerDesktopVM -Name "Time Synchronization" | Enable-VMIntegrationService
+
+###--------------------------------------------------------------------------------------------------###
 ###--------------------------------------------------------------------------------------------------###

@@ -19,7 +19,10 @@ services:
     depends_on:
       - mongodb
   mongodb:
-    image: mongo
+    build:
+      context: .
+      dockerfile: db.Dockerfile
+    image: expense_db
     volumes:
       - "/mnt/c/Java/mongodb/data:/data/db"
     ports:
@@ -28,6 +31,15 @@ services:
       - "27017"
     networks:
       - expensenet
+  # this is commented out, just to disable.
+  # mongo-express:
+  #   image: mongo-express
+  #   links:
+  #     - mongodb:mongo
+  #   ports:
+  #     - 8081:8081
+  #   networks:
+  #     - expensenet
 
 networks:
   expensenet:
