@@ -15,6 +15,12 @@ RUN echo "Timezone: $TIME_ZONE  => Current Time: `date`"
 CMD npm run prod
 
 ###--------------------------------------------------------------------------------------------------###
+###------------------------------------- DOCKER-COMPOSE ---------------------------------------------###
+
+# C:\Java\GitHub\expense docker-compose up -d --build
+# C:\Java\GitHub\expense docker-compose down
+
+###--------------------------------------------------------------------------------------------------###
 ###----------------------------------------- APP ----------------------------------------------------###
 
 # docker build . -t expense-image
@@ -39,7 +45,13 @@ CMD npm run prod
 
 # run in interactive mode; remove the container upon exit
 # docker run -it --rm --name mongodb -v /mnt/c/Java/mongodb/data:/data/db -p 27017:27017 mongo
+
+# C:\Java\mongodb> mongodump --out=dump-20.03.15 --db=expense
 # C:\Java\mongodb> mongorestore
+# C:\Java\mongodb> mongorestore -d expense-test dump/expense
+
+# create volume to persist the data.
+# docker volume create --name=mongodata
 
 ###--------------------------------------------------------------------------------------------------###
 ###------------------------------------------ TIME --------------------------------------------------###

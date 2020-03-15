@@ -11,7 +11,7 @@ services:
       - LOG_PATH=/logs
       - PORT=8000
     volumes:
-      - "C:/Java/logs:/logs"
+      - 'C:/Java/logs:/logs'
     ports:
       - 8000:8000
     networks:
@@ -24,11 +24,12 @@ services:
       dockerfile: db.Dockerfile
     image: expense_db
     volumes:
-      - "/mnt/c/Java/mongodb/data:/data/db"
+      - 'mongodata:/data/db'
+      # - '/mnt/c/Java/mongodb/data:/data/db'
     ports:
       - 27017:27017
     expose:
-      - "27017"
+      - '27017'
     networks:
       - expensenet
   # this is commented out, just to disable.
@@ -43,3 +44,6 @@ services:
 
 networks:
   expensenet:
+
+volumes:
+  mongodata:
